@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: Postal Code API for the Netherlands
+  description: |-
+    This API provides a way to retrieve geographical coordinates (latitude and longitude) based on a given postcode.
+    [Github](https://github.com/codetoby/PostalCode-API)
+  version: 1.0.0
+servers:
+  - url: https://postalcodeapi.tlmreview.com
+tags:
+  - name: coordinates
+    description: Retrieve Coordinates for your Zipcode
+paths:
+  /coordinates:
+    get:
+      tags:
+        - coordinates
+      summary: Get Coordinates for Zipcode
+      description: Retrieve coordinates for a given zipcode.
+      operationId: getCoordinatesByZipcode
+      parameters:
+        - in: query
+          name: zipcode
+          schema:
+            type: string
+          description: The zipcode for which to retrieve coordinates
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Zipcode not found
+        '429':
+          description: Rate limit exceeded
+        '500':
+          description: Internal Server Error
