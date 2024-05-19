@@ -1,17 +1,15 @@
 const express = require('express');
 const route = require('./coordinates/route');
-const { fiveSecondLimiter, minuteLimiter, hourLimiter, dayLimiter } = require('./ratelimit');
+const favicon = require('serve-favicon')
+const path = require('path');
 
 const PORT = 8000;
 
 const app = express();
 
-app.use(express.json());
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
-app.use(fiveSecondLimiter);
-app.use(minuteLimiter);
-app.use(hourLimiter);
-app.use(dayLimiter);
+app.use(express.json());
 
 app.use('/coordinates', route);
 
